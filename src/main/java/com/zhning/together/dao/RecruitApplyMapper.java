@@ -31,12 +31,30 @@ public interface RecruitApplyMapper {
                                   @Param("recruitId") long recruitId);
 
     /**
-     * 获取申请人申请的招募
+     * 获取申请人正在申请的招募id
      * @param applicantId
      * @return
      */
     List<Long> findIngRecruitByApplicantId(long applicantId);
+
+    /**
+     * 获取申请人申请通过的招募id
+     * @param applicantId
+     * @return
+     */
     List<Long> findYesRecruitByApplicantId(long applicantId);
+
+    /**
+     * 得到招募的申请人id
+     * @param recruitId
+     * @return
+     */
     List<Long> findApplicantsByRecruitId(long recruitId);
+
+    /**
+     * 得到招募的伙伴id
+     * @param recruitId
+     * @return
+     */
     List<Long> findPartnersByRecruitId(long recruitId);
 }

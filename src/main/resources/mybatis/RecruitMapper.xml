@@ -41,6 +41,14 @@
     </select>
 
     <select id="findIngRecruitByParticipantId" parameterType="java.lang.Long" resultType="Recruit">
-        SELECT * FROM recruit WHERE user_id=#{userId} AND status=1
+        SELECT * FROM recruit WHERE id IN (
+          SELECT recruit_id FROM recruit_apply WHERE applicant_id=#{applicantId}
+        ) AND status=0
+    </select>
+
+    <select id="findYesRecruitByParticipantId" parameterType="java.lang.Long" resultType="Recruit">
+        SELECT * FROM recruit WHERE id IN (
+        SELECT recruit_id FROM recruit_apply WHERE applicant_id=#{applicantId}
+        ) AND status=1
     </select>
 </mapper>
