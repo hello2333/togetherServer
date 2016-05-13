@@ -14,4 +14,7 @@ public class Constants {
 
     public static final int RECRUIT_ING = 0;
     public static final int RECRUIT_FINISH = 1;
+
+    public static final int APPLY_AGREE = 1;
+    public static final int APPLY_DISAGREE = 0;
 }

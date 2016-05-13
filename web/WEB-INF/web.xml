@@ -25,4 +25,20 @@
         <servlet-name>together-dispatcher</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>jerseySpring</servlet-name>
+        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.zhning.together</param-value>
+            <!--代表的是你服务端的路径,要和你的工程服务器端路径保持一致-->
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jerseySpring</servlet-name>
+        <url-pattern>/together/*</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -2,12 +2,15 @@ package com.zhning.together.dao;
 
 import com.zhning.together.entity.RecruitApply;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by baidu on 16/5/13.
  */
+@Repository
 public interface RecruitApplyMapper {
     /**
      * 增加一条申请

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.zhning.together.dao.RecruitMapper">
 
-    <resultMap type="Recruit" id="PostResult">
+    <resultMap type="Recruit" id="RecruitResult">
         <id property="id" column="id"/>
         <result property="recruitCount" column="recruit_count"/>
         <result property="alreadyRecruit" column="already_recruit"/>
@@ -24,29 +24,29 @@
         WHERE id=#{id}
     </update>
 
-    <select id="findById" parameterType="java.lang.Long" resultType="Recruit">
+    <select id="findById" parameterType="java.lang.Long" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE id=#{id}
     </select>
 
-    <select id="findAllIngRecruit" resultType="Recruit">
+    <select id="findAllIngRecruit" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE status=0
     </select>
 
-    <select id="findIngRecruitByOriginatorId" parameterType="java.lang.Long" resultType="Recruit">
+    <select id="findIngRecruitByOriginatorId" parameterType="java.lang.Long" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE user_id=#{userId} AND status=0
     </select>
 
-    <select id="findAlreadyRecruitByOriginatorId" parameterType="java.lang.Long" resultType="Recruit">
+    <select id="findAlreadyRecruitByOriginatorId" parameterType="java.lang.Long" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE user_id=#{userId} AND status=1
     </select>
 
-    <select id="findIngRecruitByParticipantId" parameterType="java.lang.Long" resultType="Recruit">
+    <select id="findIngRecruitByParticipantId" parameterType="java.lang.Long" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE id IN (
           SELECT recruit_id FROM recruit_apply WHERE applicant_id=#{applicantId}
         ) AND status=0
     </select>
 
-    <select id="findYesRecruitByParticipantId" parameterType="java.lang.Long" resultType="Recruit">
+    <select id="findYesRecruitByParticipantId" parameterType="java.lang.Long" resultMap="RecruitResult">
         SELECT * FROM recruit WHERE id IN (
         SELECT recruit_id FROM recruit_apply WHERE applicant_id=#{applicantId}
         ) AND status=1
