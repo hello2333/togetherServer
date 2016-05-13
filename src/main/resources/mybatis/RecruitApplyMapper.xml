@@ -23,7 +23,7 @@
         WHERE id=#{id}
     </update>
 
-    <select id="findRecruitApply" resultType="RecruitApplyResult">
+    <select id="findRecruitApply" resultMap="RecruitApplyResult">
         SELECT * FROM recruit_apply
         WHERE applicant_id=#{applicantId} AND recruit_id=#{recruitId}
     </select>

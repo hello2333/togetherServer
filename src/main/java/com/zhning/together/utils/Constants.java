@@ -17,4 +17,30 @@ public class Constants {
 
     public static final int APPLY_AGREE = 1;
     public static final int APPLY_DISAGREE = 0;
+
+    public static final int SUCCESS = 1;
+    public static final int NULL = 2;
+    public static final int FAILED = 3;
+
+    public enum Code {
+        SUCCESS(200, "success"),
+        ERROR(500, "sorry,wrong operation"),
+        NULLDATA(300, "null data");
+        private final int code;
+        private final String message;
+
+        private Code(int code, String message) {
+            this.code = code;
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+    }
 }
