@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhning.together.dao.RecruitApplyMapper">
+
+    <resultMap type="RecruitApply" id="PostResult">
+        <id property="id" column="id"/>
+        <result property="applicantId" column="applicant_id"/>
+        <result property="recruitId" column="recruit_id"/>
+        <result property="checkStatus" column="apply_status"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="RecruitApply" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        recruit_apply(applicant_id, recruit_id, apply_status)
+        VALUES (#{applicantId}, #{recruitId}, #{checkStatus});
+    </insert>
+
+    <update id="updateStatus" parameterType="RecruitApply">
+        UPDATE recruit_apply SET apply_status=#{checkStatus}
+        WHERE id=#{id}
+    </update>
+
+    <select id="findRecruitApply" resultType="Recruit">
+        SELECT * FROM recruit_apply
+        WHERE applicant_id=#{applicantId} AND recruit_id=#{recruitId}
+    </select>
+
+    <select id="findYesRecruitByApplicantId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT recruit_id FROM recruit_apply
+        WHERE apply_status=1 AND applicant_id=#{applicantId}
+    </select>
+
+    <select id="findIngRecruitByApplicantId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT recruit_id FROM recruit_apply
+        WHERE apply_status=0 AND applicant_id=#{applicantId}
+    </select>
+
+    <select id="findApplicantsByRecruitId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT applicant_id FROM recruit_apply
+        WHERE apply_status=0 AND recruit_id=#{recruitId}
+    </select>
+
+    <select id="findPartnersByRecruitId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT applicant_id FROM recruit_apply
+        WHERE apply_status=1 AND recruit_id=#{recruitId}
+    </select>
+</mapper>

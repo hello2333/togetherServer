@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhning.together.dao.RecruitMapper">
+
+    <resultMap type="Recruit" id="PostResult">
+        <id property="id" column="id"/>
+        <result property="recruitCount" column="recruit_count"/>
+        <result property="alreadyRecruit" column="already_recruit"/>
+        <result property="status" column="status"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="Recruit" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        recruit(recruit_count, already_recruit, status, user_id)
+        VALUES (#{recruitCount}, #{alreadyRecruit}, #{status}, #{userId});
+    </insert>
+
+    <update id="updateStatus" parameterType="Recruit">
+        UPDATE recruit SET status=#{status}
+        WHERE id=#{id}
+    </update>
+
+    <select id="findById" parameterType="java.lang.Long" resultType="Recruit">
+        SELECT * FROM recruit WHERE id=#{id}
+    </select>
+
+    <select id="findAllIngRecruit" resultType="Recruit">
+        SELECT * FROM recruit WHERE status=0
+    </select>
+
+    <select id="findIngRecruitByOriginatorId" parameterType="java.lang.Long" resultType="Recruit">
+        SELECT * FROM recruit WHERE user_id=#{userId} AND status=0
+    </select>
+
+    <select id="findAlreadyRecruitByOriginatorId" parameterType="java.lang.Long" resultType="Recruit">
+        SELECT * FROM recruit WHERE user_id=#{userId} AND status=1
+    </select>
+
+    <select id="findIngRecruitByParticipantId" parameterType="java.lang.Long" resultType="Recruit">
+        SELECT * FROM recruit WHERE user_id=#{userId} AND status=1
+    </select>
+</mapper>
