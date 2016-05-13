@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -26,10 +27,19 @@ public class RecruitController {
     @Produces({MediaType.APPLICATION_JSON})
     public String list(){
         Gson gson = new Gson();
-        if (null == recruitService)
-            return gson.toJson("null == recruitService");
         List<Recruit> recruitList = recruitService.findAllIngRecruit();
-
         return gson.toJson(recruitList);
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String create(@QueryParam("recruitCount") int recruitCount,
+                         @QueryParam("userId") long userId){
+        Recruit recruit = new Recruit();
+        recruit.setRecruitCount(recruitCount);
+        recruit.setUserId(userId);
+        recruitService.addRecruit(recruit);
+        Gson gson = new Gson();
+        return gson.toJson("创建成功");
     }
 }

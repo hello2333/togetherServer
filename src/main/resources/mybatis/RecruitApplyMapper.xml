@@ -5,7 +5,7 @@
 
 <mapper namespace="com.zhning.together.dao.RecruitApplyMapper">
 
-    <resultMap type="RecruitApply" id="PostResult">
+    <resultMap type="RecruitApply" id="RecruitApplyResult">
         <id property="id" column="id"/>
         <result property="applicantId" column="applicant_id"/>
         <result property="recruitId" column="recruit_id"/>
@@ -23,7 +23,7 @@
         WHERE id=#{id}
     </update>
 
-    <select id="findRecruitApply" resultType="Recruit">
+    <select id="findRecruitApply" resultType="RecruitApplyResult">
         SELECT * FROM recruit_apply
         WHERE applicant_id=#{applicantId} AND recruit_id=#{recruitId}
     </select>
