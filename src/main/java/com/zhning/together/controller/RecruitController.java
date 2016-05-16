@@ -45,14 +45,12 @@ public class RecruitController {
         return JsonResult.JsonResultForObjectAsDefault(Constants.Code.SUCCESS, recruit);
     }
 
-    @GET
+    @POST
     @Path("create")
     @Produces({MediaType.APPLICATION_JSON})
-    public String create(@QueryParam("recruitCount") int recruitCount,
-                         @QueryParam("userId") long userId){
-        Recruit recruit = new Recruit();
-        recruit.setRecruitCount(recruitCount);
-        recruit.setUserId(userId);
+    public String create(@FormParam("jsonString") String jsonString){
+        System.out.println("create:jsonString:" + jsonString);
+        Recruit recruit = new Gson().fromJson(jsonString, Recruit.class);
         recruitService.addRecruit(recruit);
         return JsonResult.JsonResultForObjectAsDefault(Constants.Code.SUCCESS, null);
     }

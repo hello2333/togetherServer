@@ -11,16 +11,18 @@
         <result property="alreadyRecruit" column="already_recruit"/>
         <result property="status" column="status"/>
         <result property="userId" column="user_id"/>
+        <result property="recruitType" column="recruit_type"/>
+        <result property="consumeType" column="consume_type"/>
     </resultMap>
 
     <insert id="insert" parameterType="Recruit" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
-        recruit(recruit_count, already_recruit, status, user_id)
-        VALUES (#{recruitCount}, #{alreadyRecruit}, #{status}, #{userId});
+        recruit(recruit_count, already_recruit, status, user_id, recruit_type, consume_type)
+        VALUES (#{recruitCount}, #{alreadyRecruit}, #{status}, #{userId}, #{recruitType}, #{consumeType});
     </insert>
 
     <update id="updateStatus" parameterType="Recruit">
-        UPDATE recruit SET status=#{status}
+        UPDATE recruit SET status=#{status}, already_recruit=#{alreadyRecruit}
         WHERE id=#{id}
     </update>
 

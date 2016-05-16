@@ -9,6 +9,8 @@ public class Recruit {
     int alreadyRecruit;
     int status;
     long userId;
+    int recruitType;
+    int consumeType;
 
     public long getId() {
         return id;
@@ -48,5 +50,21 @@ public class Recruit {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public int getRecruitType() {
+        return recruitType;
+    }
+
+    public void setRecruitType(int recruitType) {
+        this.recruitType = recruitType;
+    }
+
+    public int getConsumeType() {
+        return consumeType;
+    }
+
+    public void setConsumeType(int consumeType) {
+        this.consumeType = consumeType;
     }
 }

@@ -40,4 +40,6 @@ public interface RecruitApplyService {
      * @return
      */
     List<Long> getPartnerForRecruit(long recruitId);
+
+    boolean applyRecruitExist(long applicantId, long recruitId);
 }

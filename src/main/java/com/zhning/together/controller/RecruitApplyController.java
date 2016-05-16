@@ -30,8 +30,7 @@ public class RecruitApplyController {
     public String applyForRecruit(@QueryParam("applicantId") long applicantId,
                                   @QueryParam("recruitId") long recruitId){
         recruitApplyService.applyRecruit(applicantId, recruitId);
-        Gson gson = new Gson();
-        return gson.toJson("apply success");
+        return JsonResult.JsonResultForObjectAsDefault(Constants.Code.SUCCESS, null);
     }
 
     @GET
@@ -41,6 +40,17 @@ public class RecruitApplyController {
                                   @QueryParam("recruitId") long recruitId){
         recruitApplyService.agreeApply(applicantId, recruitId);
         return JsonResult.JsonResultForObjectAsDefault(Constants.Code.SUCCESS, null);
+    }
+
+    @GET
+    @Path("applyExist")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String applyExist(@QueryParam("applicantId") long applicantId,
+                             @QueryParam("recruitId") long recruitId){
+        boolean exist = recruitApplyService.applyRecruitExist(applicantId, recruitId);
+        if (exist)
+            return JsonResult.JsonResultForObjectAsDefault(Constants.Code.SUCCESS, null);
+        return JsonResult.JsonResultForObjectAsDefault(Constants.Code.NULLDATA, null);
     }
 
     @GET
